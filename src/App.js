@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { RiSpeedFill } from "react-icons/ri";
 import { Buttons } from "./components/Buttons";
+import { JobInfo } from "./components/JobInfo";
 const url = "https://course-api.com/react-tabs-project";
 
 function App() {
   const [datas, setDatas] = useState([]);
+  const [idItem, setIdItem] = useState();
 
   const fetchData = async () => {
     const response = await fetch(url);
     const data = await response.json();
     setDatas(data);
+    setIdItem(data[0].id);
     return data;
+  };
+
+  const choseCompany = (e) => {
+    const id = e.target.getAttribute("id");
+    setIdItem(id);
   };
 
   useEffect(() => {
@@ -25,10 +33,10 @@ function App() {
       </div>
       <div className="jobs-center">
         <div className="btn-container">
-          <Buttons datas={datas} />
+          <Buttons datas={datas} choseCompany={choseCompany} />
         </div>
         <article className="job-info">
-          {/* <JobInfo datas={datas} /> */}
+          <JobInfo datas={datas} idItem={idItem} />
 
           <div className="job-desc">{/* <JobDesc/> */}</div>
         </article>
