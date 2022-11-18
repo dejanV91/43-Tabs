@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { RiSpeedFill } from "react-icons/ri";
 import { Buttons } from "./components/Buttons";
+import { JobDesc } from "./components/JobDesc";
 import { JobInfo } from "./components/JobInfo";
 const url = "https://course-api.com/react-tabs-project";
 
@@ -38,7 +38,7 @@ function App() {
         <article className="job-info">
           <JobInfo datas={datas} idItem={idItem} />
 
-          <div className="job-desc">{/* <JobDesc/> */}</div>
+          <JobDesc datas={datas} idItem={idItem} />
         </article>
       </div>
       <button type="button" className="btn">
