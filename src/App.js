@@ -26,26 +26,11 @@ function App() {
       <div className="jobs-center">
         <div className="btn-container">
           <Buttons datas={datas} />
-          {/* <button className="job-btn active-btn">TOMMY</button>
-          <button className="job-btn false">BIGDROP</button>
-          <button className="job-btn false">CUKER</button> */}
         </div>
         <article className="job-info">
-          {/* <h3>full stack</h3>
-          <h4>Tommy</h4>
-          <p className="job-date">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Reprehenderit corporis quam animi hic eligendi corrupti placeat
-            voluptate aspernatur beatae necessitatibus.
-          </p> */}
-          <div className="job-desc">
-            {/* <RiSpeedFill className="job-icon" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos et
-              corrupti repellat repellendus explicabo porro quaerat! Atque
-              eligendi officia accusamus.
-            </p> */}
-          </div>
+          {/* <JobInfo datas={datas} /> */}
+
+          <div className="job-desc">{/* <JobDesc/> */}</div>
         </article>
       </div>
       <button type="button" className="btn">
