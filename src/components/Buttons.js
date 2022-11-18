@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Buttons = ({ datas, choseCompany }) => {
-  return datas.map((item) => {
+  const [show, setShow] = useState(0);
+
+  return datas.map((item, index) => {
     return (
       <button
         key={item.id}
         id={item.id}
-        className="job-btn false"
-        onClick={(e) => choseCompany(e)}
+        className={show === index ? "job-btn active-btn" : "job-btn false"}
+        onClick={(e) => {
+          choseCompany(e);
+          setShow(index);
+        }}
       >
         {item.company}
       </button>
