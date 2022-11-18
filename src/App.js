@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Buttons } from "./components/Buttons";
-import { JobDesc } from "./components/JobDesc";
-import { JobInfo } from "./components/JobInfo";
-const url = "https://course-api.com/react-tabs-project";
+import { RiSpeedFill } from "react-icons/ri";
 
 function App() {
-  const [datas, setDatas] = useState([]);
-  const [idItem, setIdItem] = useState();
+  const [loading, setLoading] = useState(true);
+  const [value, setValue] = useState(0);
+  const [jobs, setJobs] = useState([]);
+  const url = "https://course-api.com/react-tabs-project";
 
-  const fetchData = async () => {
+  const fetchJobs = async () => {
     const response = await fetch(url);
-    const data = await response.json();
-    setDatas(data);
-    setIdItem(data[0].id);
-    return data;
-  };
-
-  const choseCompany = (e) => {
-    const id = e.target.getAttribute("id");
-    setIdItem(id);
+    const newJobs = await response.json();
+    setJobs(newJobs);
+    setLoading(false);
   };
 
   useEffect(() => {
-    fetchData();
+    fetchJobs();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="loading">
+        <h1>loading...</h1>
+      </div>
+    );
+  }
+
+  const { title, dates, duties, company } = jobs[value];
 
   return (
     <section className="section">
@@ -31,16 +34,37 @@ function App() {
         <h2>experience</h2>
         <div className="underline"></div>
       </div>
+
       <div className="jobs-center">
         <div className="btn-container">
-          <Buttons datas={datas} choseCompany={choseCompany} />
+          {jobs.map((job, index) => {
+            return (
+              <button
+                key={index}
+                className={`job-btn ${value === index && "active-btn"}`}
+                onClick={() => setValue(index)}
+              >
+                {job.company}
+              </button>
+            );
+          })}
         </div>
-        <article className="job-info">
-          <JobInfo datas={datas} idItem={idItem} />
 
-          <JobDesc datas={datas} idItem={idItem} />
+        <article className="job-info">
+          <h3>{title}</h3>
+          <h4>{company}</h4>
+          <p className="job-date">{dates}</p>
+          {duties.map((duty, index) => {
+            return (
+              <div key={index} className="job-desc">
+                <RiSpeedFill className="job-icon" />
+                <p>{duty}</p>
+              </div>
+            );
+          })}
         </article>
       </div>
+
       <button type="button" className="btn">
         more info
       </button>
